@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="Registro.css">
+</head>
+<body>
+
+    <div class="background">
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+        <div class="bomba"></div>
+    </div>
+
+    <div class="container">
+        <h2>Registro</h2>
+        <input type="text" placeholder="Nombre" id="register-name">
+        <input type="text" placeholder="Username" id="register-username">
+        <input type="password" placeholder="Contraseña" id="register-password">
+        <input type="date" id="register-birthdate">
+        <button onclick="register()">Registrar</button>
+    
+        <div class="fb-section">
+            <p>O regístrate con:</p>
+            <button class="fb-custom-btn" onclick="loginWithFacebook()">
+                <img src="facebook-icon.png" alt="Facebook" width="20" height="20">
+                Continuar con Facebook
+            </button>
+        </div>
+    </div>
+
+    <div id="fb-root"></div>
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '1825192654944412',
+                cookie: true,
+                xfbml: false,
+                version: 'v22.0'
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/es_ES/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        function loginWithFacebook() {
+    FB.login(function (response) {
+        if (response.authResponse) {
+            console.log("Usuario conectado", response.authResponse);
+            FB.api('/me', { fields: 'name,email' }, function(profile) {
+                alert("¡Hola " + profile.name + "! Has iniciado sesión con Facebook.");
+                // Aquí puedes hacer algo con los datos como enviarlos a tu backend
+                // Por ejemplo: enviar name, email, id
+            });
+        } else {
+            alert("Inicio de sesión cancelado o no autorizado.");
+        }
+    }, { scope: 'public_profile,email' });
+}
+    </script>
+
+    <script src="Registro.js"></script>
+</body>
+</html>

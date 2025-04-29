@@ -1,0 +1,153 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #a3d8e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: white;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.bomba {
+  position: absolute;
+  width: 60px;  /* Ajusta el tamaño de la bomba */
+  height: 60px; /* Ajusta el tamaño de la bomba */
+  background-image: url('Bombafondo2.png'); /* Ruta a tu imagen */
+  background-size: cover;
+  background-position: center;
+  animation: moverBomba 4s infinite;
+}
+
+@keyframes moverBomba {
+  0% {
+      transform: scale(1);
+  }
+  50% {
+      transform: scale(1.2);
+  }
+  100% {
+      transform: scale(1);
+  }
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  background-color: #d4d4d4;
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+  margin: 100px auto;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #b9c2b2;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 16px;
+  width: 355px;
+}
+
+input::placeholder {
+  color: #ffffff;
+}
+
+button {
+  padding: 10px;
+  background-color: #b9c2b2;
+  border: none;
+  border-radius: 15px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #a7d7b8;
+}
+
+.fb-section {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.fb-custom-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 20px;
+  background-color: #3b5998;
+  border: none;
+  border-radius: 15px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.fb-custom-btn:hover {
+  background-color: #2d4373;
+}
+
+.fb-icon {
+  vertical-align: middle;
+}
+
+#scoreboard tbody tr:hover {
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+/* Selected row style */
+#scoreboard tbody tr.selected {
+  background-color: #add8e6; /* light blue */
+}
+
+/* Optional: style for the publish button */
+#publish-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4267B2; /* Facebook blue */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#publish-btn:hover {
+  background-color: #365899;
+}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BomberRun</title>
+</head>
+<body>
+  <button onclick="window.location.href='Puntuacion.html'" style="position: absolute; top: 20px; left: 20px; padding: 10px 20px; font-size: 16px; cursor: pointer; background: #a7d7b8;
+    color: black;">
+    Puntuaciones
+</button>
+  <script type="module">
+    import * as THREE from './three.module.js';
+    import { OrbitControls } from './OrbitControls.js';
+    import { GLTFLoader } from './GLTFLoader.js';
+  
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color("#3449E5");
+  
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight);
+    camera.position.set(0, 5, 20);
+  
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight); 
+    renderer.shadowMap.enabled = true;
+    document.body.appendChild(renderer.domElement);
+  
+    const hemisphereLight = new THREE.HemisphereLight(0xffffbb, 0x080820, 1); 
+    scene.add(hemisphereLight);
+  
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1); 
+    directionalLight.position.set(1, 5, -1);
+    scene.add(directionalLight);
+  
+    const planeGeometry = new THREE.PlaneGeometry(50, 50);
+    const planeMaterial = new THREE.MeshStandardMaterial({ color: "slategrey" });
+    const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+    plane.rotateX(-Math.PI / 2);
+    plane.position.set(0, -0.5, 0);
+    scene.add(plane);
+
+    const loaderGLTF = new GLTFLoader();
+    loaderGLTF.load(
+      "bomba.glb", 
+      function(model) {
+        const obj = model.scene;
+        obj.scale.set(0.2, 0.2, 0.2);
+        obj.position.set(6, 0, 0);
+        scene.add(obj);
+        console.log(model);
+      }
+    );
+
+    const loader1GLTF = new GLTFLoader();
+    loader1GLTF.load(
+      "laberinto.glb", 
+      function(model) {
+        const obj = model.scene;
+        obj.scale.set(0.4, 0.4, 0.4);
+        obj.position.set(15, 0, 0);
+        scene.add(obj);
+        console.log(model);
+      }
+    );
+
+    let mixer;
+    const loader2GLTF = new GLTFLoader();
+    loader2GLTF.load(
+      "bombersito.glb", 
+      function(model) {
+        const obj = model.scene;
+        obj.scale.set(0.4, 0.4, 0.4);
+        obj.position.set(-5, 0, 0);
+        scene.add(obj);
+        console.log(model);
+        mixer = new THREE.AnimationMixer(obj);
+        const action = mixer.clipAction(model.animations[0]);
+        action.play();
+      }
+    );
+  
+    const cameraControl = new OrbitControls(camera, renderer.domElement);
+  
+    function animate() {
+      if(mixer){
+        mixer.update(0.01)
+      }
+      renderer.render(scene, camera);
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+  </script>
+  <script src="BomberRun.js"></script>
+</body>
+</html>
